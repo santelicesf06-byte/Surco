@@ -24,7 +24,7 @@ h1{font-family:Georgia,serif;font-size:30px;line-height:1.05;margin:0}.sub{color
 .fab{position:fixed;right:max(22px,calc((100vw - 480px)/2 + 22px));bottom:88px;width:58px;height:58px;border-radius:50%;background:var(--dark);color:#fff;font-size:28px;box-shadow:0 10px 24px #0004;z-index:19}
 .page{padding:8px 18px}.search{display:flex;gap:8px;margin:8px 0}.search input{flex:1;padding:14px 16px;border:0;border-radius:18px;background:#fffaf1;box-shadow:inset 0 0 0 1px #0000000d}.pillrow{display:flex;gap:8px;overflow:auto;padding-bottom:8px}.pill{white-space:nowrap;padding:9px 14px;border-radius:99px;background:#e8ddcd;color:#4f493f;font-size:12px}.pill.active{background:var(--accent);color:#fff}
 .detail{padding:18px}.detailTop{display:flex;justify-content:space-between}.bigCover{width:100%;aspect-ratio:1;border-radius:24px;object-fit:cover;box-shadow:0 16px 36px #0003}.detail h1{font-size:34px;margin:18px 0 3px}.meta{color:var(--muted);font-size:14px}.expand{width:100%;margin:20px 0;padding:16px;border-radius:18px;background:#fffaf1;font-weight:700}.details{display:none}.details.open{display:block}.card{background:#fffaf1;border-radius:20px;padding:18px;margin:10px 0;box-shadow:0 6px 18px #0000000d}.row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}.row:last-child{border:0}.label{color:var(--muted)}
-.form{padding:18px}.form h1{margin-bottom:18px}.field{margin:12px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.field input,.field textarea,.field select{width:100%;padding:13px;border:1px solid var(--line);border-radius:14px;background:#fffaf1}.coverPreview{width:150px;height:150px;border-radius:18px;object-fit:cover;background:#e7ddcf;display:block;margin:0 auto 10px}.actions{display:flex;gap:10px;margin-top:18px}.primary{flex:1;background:var(--dark);color:#fff;padding:15px;border-radius:16px;font-weight:700}.secondary{padding:15px;border-radius:16px;background:#e5dacb}.danger{background:#a43b32;color:#fff}.themeGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.theme{padding:14px;border-radius:18px;background:#fffaf1;text-align:left;border:2px solid transparent}.theme.selected{border-color:var(--accent)}.swatches{display:flex;gap:6px;margin-bottom:10px}.swatches i{width:28px;height:28px;border-radius:50%;display:block}
+.form{padding:18px}.form h1{margin-bottom:18px}.field{margin:12px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.field input,.field textarea,.field select{width:100%;padding:13px;border:1px solid var(--line);border-radius:14px;background:#fffaf1}.coverPreview{width:150px;height:150px;border-radius:18px;object-fit:cover;background:#e7ddcf;display:block;margin:0 auto 10px;box-shadow:0 8px 20px #00000012}.coverTools{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.coverTools button{min-height:46px}.coverSearch{margin-top:10px}.coverSearchTitle{font-weight:700;font-size:13px;margin:12px 0 8px}.coverResults{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.coverOption{background:#fffaf1;border:1px solid var(--line);border-radius:14px;padding:7px;text-align:left}.coverOption img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:#ddd}.coverOption .ct{font-size:11px;line-height:1.25;margin-top:6px}.status{font-size:12px;color:var(--muted);margin-top:8px;text-align:center}.actions{display:flex;gap:10px;margin-top:18px}.primary{flex:1;background:var(--dark);color:#fff;padding:15px;border-radius:16px;font-weight:700}.secondary{padding:15px;border-radius:16px;background:#e5dacb}.danger{background:#a43b32;color:#fff}.themeGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.theme{padding:14px;border-radius:18px;background:#fffaf1;text-align:left;border:2px solid transparent}.theme.selected{border-color:var(--accent)}.swatches{display:flex;gap:6px;margin-bottom:10px}.swatches i{width:28px;height:28px;border-radius:50%;display:block}
 .empty{text-align:center;color:var(--muted);padding:50px 20px}.hidden{display:none!important}
 </style>
 </head>
@@ -90,26 +90,51 @@ function detail(id){
  <button class="expand" onclick="this.nextElementSibling.classList.toggle('open')">Ver detalles　⌄</button>
  <div class="details">
  <div class="card"><b>Datos de la edición</b>${row("Año",r.year)}${row("Sello",r.label)}${row("País",r.country)}${row("Nº de catálogo",r.catalog)}${row("Formato",r.format)}${row("Velocidad",r.speed)}${row("Edición",r.edition)}</div>
- <div class="card"><b>Estado</b>${row("Disco",r.disc)}${row("Portada",r.sleeve)}</div>
+ <div class="card"><b>Estado</b>${row("Disco",conditionLabel(r.disc)+` (${r.disc||"—"})`)}${row("Portada",conditionLabel(r.sleeve)+` (${r.sleeve||"—"})`)}</div>
  <div class="card"><b>Mi colección</b>${row("Adquisición",r.date)}${row("Precio pagado",money(r.paid))}${row("Valor de mercado",money(r.market))}${row("Ubicación",r.location)}</div>
  ${r.notes?`<div class="card"><b>Mi nota</b><p>${r.notes}</p></div>`:""}</div>
  <div class="actions"><button class="primary" onclick="openVinylForm('${id}')">Editar vinilo</button></div></div>${nav()}`;
 }
 function row(a,b){return `<div class="row"><span class="label">${a}</span><span>${b||"—"}</span></div>`}
 function toggleFav(id){let r=records.find(x=>x.id===id);r.favorite=!r.favorite;save();detail(id)}
+const conditionData={
+ new:{code:"N",label:"Nuevo",desc:"Sin uso"},
+ NM:{code:"NM",label:"Casi nuevo",desc:"Prácticamente sin señales de uso"},
+ EX:{code:"EX",label:"Excelente",desc:"Señales mínimas de uso"},
+ "VG+":{code:"VG+",label:"Muy bueno +",desc:"Muy buen estado, desgaste leve"},
+ VG:{code:"VG",label:"Muy bueno",desc:"Buen estado, desgaste visible"},
+ G:{code:"G",label:"Bueno",desc:"Desgaste importante"},
+ P:{code:"P",label:"Malo",desc:"Daños importantes"}
+};
+function conditionLabel(code){return conditionData[code]?.label||code||"—"}
+function conditionOptions(selected){return Object.values(conditionData).map(c=>`<option value="${c.code}" ${selected===c.code?"selected":""}>${c.label} (${c.code})</option>`).join("")}
+let coverSearchResults=[];
+
 function openVinylForm(id=null){
  let r=id?records.find(x=>x.id===id):{artist:"",album:"",year:"",label:"",country:"",catalog:"",format:"LP · 12″",speed:"33 RPM",edition:"",disc:"VG+",sleeve:"VG+",date:new Date().toLocaleDateString("es-CL"),paid:"",market:"",location:"",notes:"",favorite:false,cover:""};
  currentId=id;
  app.innerHTML=`<div class="form"><button class="icon" onclick="${id?`detail('${id}')`:`home()`}">←</button><h1>${id?"Editar vinilo":"Nuevo vinilo"}</h1>
- <img id="preview" class="coverPreview" src="${r.cover||""}" style="${r.cover?"":"display:none"}"><input id="photo" type="file" accept="image/*" capture="environment" onchange="photoPreview(event)">
+ <div class="field"><label>PORTADA DEL DISCO</label>
+ <img id="preview" class="coverPreview" src="${r.cover||""}" style="${r.cover?"":"display:none"}">
+ <div class="coverTools">
+   <button class="secondary" type="button" onclick="searchCover()">🔎 Buscar portada</button>
+   <button class="secondary" type="button" onclick="document.getElementById('photoCamera').click()">📷 Tomar foto</button>
+   <button class="secondary" type="button" onclick="document.getElementById('photoFile').click()">🖼️ Elegir foto</button>
+   <button class="secondary" type="button" onclick="clearCover()">✕ Quitar portada</button>
+ </div>
+ <input id="photoCamera" type="file" accept="image/*" capture="environment" hidden onchange="photoPreview(event)">
+ <input id="photoFile" type="file" accept="image/*" hidden onchange="photoPreview(event)">
+ <div id="coverStatus" class="status">Puedes buscarla por artista y álbum, o usar una foto del disco.</div>
+ <div id="coverResults" class="coverSearch"></div>
+ </div>
  <div class="field"><label>ARTISTA *</label><input id="artist" value="${esc(r.artist)}"></div><div class="field"><label>ÁLBUM *</label><input id="album" value="${esc(r.album)}"></div>
  <div class="field"><label>AÑO</label><input id="year" value="${esc(r.year)}" inputmode="numeric"></div><div class="field"><label>SELLO</label><input id="label" value="${esc(r.label)}"></div>
  <div class="field"><label>PAÍS</label><input id="country" value="${esc(r.country)}"></div><div class="field"><label>Nº DE CATÁLOGO</label><input id="catalog" value="${esc(r.catalog)}"></div>
  <div class="field"><label>FORMATO</label><select id="format"><option>LP · 12″</option><option>EP</option><option>Single · 7″</option><option>Otro</option></select></div>
  <div class="field"><label>VELOCIDAD</label><select id="speed"><option>33 RPM</option><option>45 RPM</option><option>78 RPM</option></select></div>
  <div class="field"><label>EDICIÓN</label><input id="edition" value="${esc(r.edition)}" placeholder="Original, reedición..."></div>
- <div class="field"><label>ESTADO DEL DISCO</label><select id="disc"><option>NM</option><option>EX</option><option selected>VG+</option><option>VG</option><option>G</option><option>P</option></select></div>
- <div class="field"><label>ESTADO DE LA PORTADA</label><select id="sleeve"><option>NM</option><option>EX</option><option selected>VG+</option><option>VG</option><option>G</option><option>P</option></select></div>
+ <div class="field"><label>ESTADO DEL DISCO</label><select id="disc">${conditionOptions(r.disc||"VG+")}</select></div>
+ <div class="field"><label>ESTADO DE LA PORTADA</label><select id="sleeve">${conditionOptions(r.sleeve||"VG+")}</select></div>
  <div class="field"><label>FECHA DE ADQUISICIÓN</label><input id="date" value="${esc(r.date)}"></div>
  <div class="field"><label>PRECIO PAGADO</label><input id="paid" value="${esc(r.paid)}" inputmode="decimal"></div>
  <div class="field"><label>VALOR DE MERCADO</label><input id="market" value="${esc(r.market)}" inputmode="decimal"></div>
@@ -117,17 +142,72 @@ function openVinylForm(id=null){
  <div class="field"><label>NOTAS</label><textarea id="notes" rows="3">${esc(r.notes)}</textarea></div>
  <div class="actions"><button class="primary" onclick="saveForm('${id||""}')">Guardar vinilo</button>${id?`<button class="secondary danger" onclick="removeRecord('${id}')">Eliminar</button>`:""}</div>
  </div>`;
- document.getElementById("format").value=r.format;document.getElementById("speed").value=r.speed;document.getElementById("disc").value=r.disc;document.getElementById("sleeve").value=r.sleeve;
+ document.getElementById("format").value=r.format;document.getElementById("speed").value=r.speed;
 }
 function esc(s){return String(s||"").replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
-function photoPreview(e){let f=e.target.files[0];if(!f)return;let url=URL.createObjectURL(f);let p=document.getElementById("preview");p.src=url;p.style.display="block";p.dataset.pending=url}
-function saveForm(id){
+function photoPreview(e){
+ let f=e.target.files[0];if(!f)return;
+ let url=URL.createObjectURL(f);let p=document.getElementById("preview");
+ p.src=url;p.style.display="block";p.dataset.pending=url;p.dataset.cover="";p.dataset.clear="";
+ const s=document.getElementById("coverStatus");if(s)s.textContent="Fotografía seleccionada. Se guardará con el vinilo.";
+}
+function clearCover(){
+ const p=document.getElementById("preview");
+ p.src="";p.style.display="none";delete p.dataset.pending;delete p.dataset.cover;p.dataset.clear="1";
+ const s=document.getElementById("coverStatus");if(s)s.textContent="Sin portada. Puedes buscarla en la web o agregar una fotografía.";
+}
+function artUrl(u){return (u||"").replace(/100x100bb/g,"600x600bb").replace(/100x100/g,"600x600")}
+async function searchCover(){
+ const artist=document.getElementById("artist")?.value.trim();
+ const album=document.getElementById("album")?.value.trim();
+ const box=document.getElementById("coverResults");const status=document.getElementById("coverStatus");
+ if(!artist||!album){alert("Primero escribe el artista y el álbum.");return}
+ box.innerHTML="<div class='status'>Buscando portadas…</div>";
+ if(status)status.textContent="Buscando una portada para "+artist+" — "+album;
+ try{
+   const url="https://itunes.apple.com/search?term="+encodeURIComponent(artist+" "+album)+"&entity=album&limit=12&country=CL";
+   const res=await fetch(url);if(!res.ok)throw new Error("HTTP "+res.status);
+   const data=await res.json();
+   coverSearchResults=(data.results||[]).filter(x=>x.artworkUrl100);
+   if(!coverSearchResults.length){box.innerHTML="<div class='status'>No encontré una portada. Prueba con otro nombre o agrega una foto.</div>";return}
+   box.innerHTML="<div class='coverSearchTitle' style='grid-column:1/-1'>Elige la portada correcta</div>"+coverSearchResults.map((x,i)=>`<button type="button" class="coverOption" data-cover-index="${i}"><img src="${esc(artUrl(x.artworkUrl100))}" alt=""><div class="ct"><b>${esc(x.collectionName||"Álbum")}</b><br>${esc(x.artistName||artist)}</div></button>`).join("");
+   box.querySelectorAll(".coverOption").forEach(btn=>btn.addEventListener("click",()=>selectWebCover(coverSearchResults[Number(btn.dataset.coverIndex)])));
+   if(status)status.textContent="Selecciona la imagen que corresponda a tu disco.";
+ }catch(err){
+   console.error(err);
+   box.innerHTML="<div class='status'>No fue posible buscar en la web en este momento. Puedes agregar una foto directamente.</div>";
+   if(status)status.textContent="Búsqueda web no disponible; usa una fotografía si estás sin conexión.";
+ }
+}
+function selectWebCover(result){
+ const url=artUrl(result?.artworkUrl100||result?.artworkUrl600);if(!url)return;
+ const p=document.getElementById("preview");p.src=url;p.style.display="block";delete p.dataset.pending;p.dataset.cover=url;delete p.dataset.clear;
+ const box=document.getElementById("coverResults");if(box)box.innerHTML="";
+ const s=document.getElementById("coverStatus");if(s)s.textContent="Portada seleccionada desde la web.";
+}
+async function blobToDataURL(blob){return await new Promise((resolve,reject)=>{const rd=new FileReader();rd.onload=()=>resolve(rd.result);rd.onerror=reject;rd.readAsDataURL(blob)})}
+async function cacheCover(url){
+ if(!url||!/^https?:/i.test(url))return url;
+ try{const res=await fetch(url,{mode:"cors"});if(!res.ok)throw new Error();const blob=await res.blob();return await blobToDataURL(blob)}catch(e){return url}
+}
+async function saveForm(id){
  let old=id?records.find(x=>x.id===id):null;let p=document.getElementById("preview");
- const val=id=>document.getElementById(id)?.value ?? "";
+ const val=k=>document.getElementById(k)?.value ?? "";
  let r={id:id||String(Date.now()),artist:val("artist").trim(),album:val("album").trim(),year:val("year"),label:val("label"),country:val("country"),catalog:val("catalog"),format:val("format"),speed:val("speed"),edition:val("edition"),disc:val("disc"),sleeve:val("sleeve"),date:val("date"),paid:val("paid"),market:val("market"),location:val("location"),notes:val("notes"),favorite:old?.favorite||false,cover:old?.cover||""};
  if(!r.artist||!r.album){alert("Artista y álbum son obligatorios.");return}
- if(p.dataset.pending){let c=document.createElement("canvas"),ctx=c.getContext("2d"),img=new Image();img.onload=()=>{let max=1000,s=Math.min(1,max/img.width,max/img.height);c.width=img.width*s;c.height=img.height*s;ctx.drawImage(img,0,0,c.width,c.height);r.cover=c.toDataURL("image/jpeg",.82);records=id?records.map(x=>x.id===id?r:x):[...records,r];save();detail(r.id)};img.src=p.dataset.pending;return}
- records=id?records.map(x=>x.id===id?r:x):[...records,r];save();detail(r.id)
+ if(p.dataset.clear){r.cover=""}
+ const btn=document.querySelector('.actions .primary');if(btn){btn.disabled=true;btn.textContent="Guardando…"}
+ try{
+   if(p.dataset.pending){
+     await new Promise((resolve,reject)=>{let c=document.createElement("canvas"),ctx=c.getContext("2d"),img=new Image();img.onload=()=>{let max=1000,s=Math.min(1,max/img.width,max/img.height);c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);ctx.drawImage(img,0,0,c.width,c.height);r.cover=c.toDataURL("image/jpeg",.82);resolve()};img.onerror=reject;img.src=p.dataset.pending});
+   } else if(p.dataset.cover){
+     r.cover=await cacheCover(p.dataset.cover);
+   }
+   records=id?records.map(x=>x.id===id?r:x):[...records,r];save();detail(r.id);
+ }catch(e){
+   console.error(e);alert("No pude guardar la portada. El vinilo sí puede guardarse sin imagen.");
+   records=id?records.map(x=>x.id===id?r:x):[...records,r];save();detail(r.id);
+ }
 }
 function save(){localStorage.setItem("surco_records",JSON.stringify(records))}
 function removeRecord(id){if(confirm("¿Eliminar este vinilo de la colección?")){records=records.filter(x=>x.id!==id);save();collection()}}
@@ -138,7 +218,7 @@ function settings(){
  ${themeCard("blue","Azul","#d7e7ee","#3e7893","#171717","Sereno y moderno")}
  ${themeCard("olive","Oliva","#e7e8d8","#53643e","#1d211a","Natural y relajado")}
  ${themeCard("night","Nocturno","#202225","#d88a42","#f7f1e5","Para escuchar de noche")}
- </div><div class="card" style="margin-top:16px"><b>V1</b><p style="color:var(--muted)">La biblioteca funciona localmente en este prototipo. El escaneo de códigos y Discogs quedan preparados para la siguiente etapa.</p></div></div>${nav()}`;
+ </div><div class="card" style="margin-top:16px"><b>V1.2</b><p style="color:var(--muted)">Ahora puedes buscar portadas en la web, tomar una fotografía o elegir una imagen. Los estados se muestran en español y se mantiene el código NM, EX, VG+, etc.</p></div></div>${nav()}`;
 }
 function themeCard(id,name,bg,ac,ink,desc){return `<button class="theme ${theme===id?"selected":""}" onclick="theme='${id}';localStorage.setItem('surco_theme',theme);applyTheme();settings()"><div class="swatches"><i style="background:${bg}"></i><i style="background:${ac}"></i><i style="background:${ink}"></i></div><b>${name}</b><div style="font-size:12px;color:var(--muted);margin-top:3px">${desc}</div></button>`}
 home();
