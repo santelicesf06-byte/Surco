@@ -18,13 +18,13 @@ h1{font-family:Georgia,serif;font-size:30px;line-height:1.05;margin:0}.sub{color
 .hero .arm{position:absolute;width:12px;height:220px;background:#c6c6c6;right:62px;top:52px;transform:rotate(25deg);border-radius:8px}
 .hero .title{position:absolute;z-index:2;left:22px;bottom:20px;font-family:Georgia,serif;font-size:26px;max-width:220px}.hero small{font-family:inherit;color:#332b22}
 .section{padding:0 18px}.sectionHead{display:flex;justify-content:space-between;align-items:center;margin:16px 0 10px}.sectionHead h2{font-family:Georgia,serif;font-size:21px;margin:0}.link{color:var(--accent);font-size:13px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.cover{aspect-ratio:1;border-radius:15px;object-fit:cover;background:#ddd;box-shadow:0 6px 18px #00000012}.albumName{font-weight:650;font-size:14px;margin-top:7px}.artist{font-size:12px;color:var(--muted);margin-top:2px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.grid>div{min-width:0}.grid .albumName{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.grid .artist{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cover{aspect-ratio:1;border-radius:15px;object-fit:cover;background:#ddd;box-shadow:0 6px 18px #00000012}.albumName{font-weight:650;font-size:14px;margin-top:7px}.artist{font-size:12px;color:var(--muted);margin-top:2px}
 .bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);background:#fffaf1eF;backdrop-filter:blur(16px);border-top:1px solid #00000010;display:flex;justify-content:space-around;padding:10px 10px calc(10px + env(safe-area-inset-bottom));z-index:20}
 .nav{background:none;color:var(--muted);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:4px}.nav.active{color:var(--accent);font-weight:700}.nav span:first-child{font-size:22px}
 .fab{position:fixed;right:max(22px,calc((100vw - 480px)/2 + 22px));bottom:88px;width:58px;height:58px;border-radius:50%;background:var(--dark);color:#fff;font-size:28px;box-shadow:0 10px 24px #0004;z-index:19}
 .page{padding:8px 18px}.search{display:flex;gap:8px;margin:8px 0}.search input{flex:1;padding:14px 16px;border:0;border-radius:18px;background:#fffaf1;box-shadow:inset 0 0 0 1px #0000000d}.pillrow{display:flex;gap:8px;overflow:auto;padding-bottom:8px}.pill{white-space:nowrap;padding:9px 14px;border-radius:99px;background:#e8ddcd;color:#4f493f;font-size:12px}.pill.active{background:var(--accent);color:#fff}
 .detail{padding:18px}.detailTop{display:flex;justify-content:space-between}.bigCover{width:100%;aspect-ratio:1;border-radius:24px;object-fit:cover;box-shadow:0 16px 36px #0003}.detail h1{font-size:34px;margin:18px 0 3px}.meta{color:var(--muted);font-size:14px}.expand{width:100%;margin:20px 0;padding:16px;border-radius:18px;background:#fffaf1;font-weight:700}.details{display:none}.details.open{display:block}.card{background:#fffaf1;border-radius:20px;padding:18px;margin:10px 0;box-shadow:0 6px 18px #0000000d}.row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}.row:last-child{border:0}.label{color:var(--muted)}
-.form{padding:18px}.form h1{margin-bottom:18px}.field{margin:12px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.field input,.field textarea,.field select{width:100%;padding:13px;border:1px solid var(--line);border-radius:14px;background:#fffaf1}.coverPreview{width:210px;height:210px;border-radius:18px;object-fit:cover;background:#e7ddcf;display:block;margin:0 auto 10px;box-shadow:0 8px 20px #00000012}.coverTools{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:13px 0}.coverTools button{min-height:55px;border:1px solid #0000000b;border-radius:21px;background:#fffaf1;display:flex;align-items:center;justify-content:center;gap:10px;color:var(--ink);box-shadow:0 5px 14px #0000000a;transition:transform .15s,box-shadow .15s}.coverTools button:active{transform:scale(.98);box-shadow:0 2px 8px #0000000a}.coverIcon{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#efe4d4;color:var(--accent)}.coverIcon svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.coverTools .dangerLite{color:#6e675e}.coverTools .dangerLite .coverIcon{color:#6e675e}.coverSearch{margin-top:10px}.coverSearchTitle{font-weight:700;font-size:13px;margin:12px 0 8px}.coverResults{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.coverOption{background:#fffaf1;border:1px solid var(--line);border-radius:14px;padding:7px;text-align:left}.coverOption img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:#ddd}.coverOption .ct{font-size:11px;line-height:1.25;margin-top:6px}.status{font-size:12px;color:var(--muted);margin-top:8px;text-align:center}.autoFill{margin-top:13px;width:100%;min-height:55px;border-radius:21px;background:#efe4d4;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:10px;font-weight:650}.autoFill .coverIcon{background:#fffaf1}.genreHint{font-size:11px;color:var(--muted);margin-top:6px}.actions{display:flex;gap:10px;margin-top:18px}.primary{flex:1;background:var(--dark);color:#fff;padding:15px;border-radius:16px;font-weight:700}.secondary{padding:15px;border-radius:16px;background:#e5dacb}.danger{background:#a43b32;color:#fff}.themeGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.theme{padding:14px;border-radius:18px;background:#fffaf1;text-align:left;border:2px solid transparent}.theme.selected{border-color:var(--accent)}.swatches{display:flex;gap:6px;margin-bottom:10px}.swatches i{width:28px;height:28px;border-radius:50%;display:block}
+.form{padding:18px}.form h1{margin-bottom:18px}.field{margin:12px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.field input,.field textarea,.field select{width:100%;padding:13px;border:1px solid var(--line);border-radius:14px;background:#fffaf1}.coverPreview{width:210px;height:210px;border-radius:18px;object-fit:cover;background:#e7ddcf;display:block;margin:0 auto 10px;box-shadow:0 8px 20px #00000012}.coverTools{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:13px 0}.coverTools button{min-height:52px;height:52px;border:1px solid #0000000b;border-radius:18px;background:#fffaf1;display:flex;align-items:center;justify-content:center;color:var(--ink);box-shadow:0 5px 14px #0000000a;transition:transform .15s,box-shadow .15s}.coverTools button:active{transform:scale(.98);box-shadow:0 2px 8px #0000000a}.coverIcon{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#efe4d4;color:var(--accent)}.coverIcon svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}.coverTools .dangerLite{color:#6e675e}.coverTools button[title]{position:relative}.coverTools button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.coverTools .dangerLite .coverIcon{color:#6e675e}.coverSearch{margin-top:10px}.coverSearchTitle{font-weight:700;font-size:13px;margin:12px 0 8px}.coverResults{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.coverOption{background:#fffaf1;border:1px solid var(--line);border-radius:14px;padding:7px;text-align:left}.coverOption img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;background:#ddd}.coverOption .ct{font-size:11px;line-height:1.25;margin-top:6px}.status{font-size:12px;color:var(--muted);margin-top:8px;text-align:center}.autoFill{margin-top:13px;width:100%;min-height:55px;border-radius:21px;background:#efe4d4;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:10px;font-weight:650}.scanPanel{margin-top:12px;background:#171717;border-radius:22px;padding:12px;display:none;box-shadow:0 12px 28px #0003}.scanPanel.open{display:block}.scanVideo{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;background:#000}.scanHead{display:flex;justify-content:space-between;align-items:center;color:#fff;padding:2px 2px 10px;font-size:13px}.scanClose{background:#fff2;color:#fff;width:34px;height:34px;border-radius:50%}.scanStatus{color:#fff;opacity:.75;font-size:11px;text-align:center;padding:8px 0 2px}.scanManual{display:flex;gap:8px;margin-top:8px}.scanManual input{flex:1;padding:11px 12px;border:0;border-radius:12px;background:#fff}.scanManual button{width:44px;border-radius:12px;background:var(--accent);color:#fff}.autoFill .coverIcon{background:#fffaf1}.genreHint{font-size:11px;color:var(--muted);margin-top:6px}.actions{display:flex;gap:10px;margin-top:18px}.primary{flex:1;background:var(--dark);color:#fff;padding:15px;border-radius:16px;font-weight:700}.secondary{padding:15px;border-radius:16px;background:#e5dacb}.danger{background:#a43b32;color:#fff}.themeGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.theme{padding:14px;border-radius:18px;background:#fffaf1;text-align:left;border:2px solid transparent}.theme.selected{border-color:var(--accent)}.swatches{display:flex;gap:6px;margin-bottom:10px}.swatches i{width:28px;height:28px;border-radius:50%;display:block}
 .empty{text-align:center;color:var(--muted);padding:50px 20px}.hidden{display:none!important}
 </style>
 </head>
@@ -40,7 +40,7 @@ const seed=[
 let records=JSON.parse(localStorage.getItem("surco_records")||"null")||seed;
 let theme=localStorage.getItem("surco_theme")||"classic";
 let currentId=null;
-records=records.map(r=>({...r,genre:r.genre||""}));
+records=records.map(r=>({...r,genre:r.genre||"",barcode:r.barcode||""}));
 
 const themes={
 classic:{bg:"#f3eadb",card:"#fffaf1",ink:"#171717",muted:"#6e675e",accent:"#ef7f22"},
@@ -124,31 +124,39 @@ const genreGroups={
 "Otros":["Experimental","Industrial","Spoken word","Soundtrack","Navideña","Infantil","World music","Easy listening","New age"]
 };
 function genreOptions(selected){let out='<option value="">Seleccionar estilo…</option>';for(const [g,items] of Object.entries(genreGroups)){out+=`<optgroup label="${g}">${items.map(x=>`<option value="${esc(x)}" ${selected===x?"selected":""}>${esc(x)}</option>`).join("")}</optgroup>`}return out}
-function ico(name){const p={search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/>',camera:'<path d="M4 8.5h3l1.5-2h5L15 8.5h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z"/><circle cx="11" cy="14" r="3.2"/>',image:'<rect x="3" y="4" width="16" height="16" rx="2"/><circle cx="8" cy="9" r="1.3"/><path d="m4.5 17 4.2-4.5 3 3 2.2-2.2 3.6 3.7"/>',x:'<path d="m6 6 10 10M16 6 6 16"/>'};return `<span class="coverIcon"><svg viewBox="0 0 22 22" aria-hidden="true">${p[name]}</svg></span>`}
+function ico(name){const p={search:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/>',camera:'<path d="M4 8.5h3l1.5-2h5L15 8.5h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z"/><circle cx="11" cy="14" r="3.2"/>',image:'<rect x="3" y="4" width="16" height="16" rx="2"/><circle cx="8" cy="9" r="1.3"/><path d="m4.5 17 4.2-4.5 3 3 2.2-2.2 3.6 3.7"/>',x:'<path d="m6 6 10 10M16 6 6 16"/>',scan:'<path d="M7 3H4a1 1 0 0 0-1 1v3M15 3h3a1 1 0 0 1 1 1v3M19 15v3a1 1 0 0 1-1 1h-3M7 19H4a1 1 0 0 1-1-1v-3"/><path d="M7 9h8v4H7z"/>'};return `<span class="coverIcon"><svg viewBox="0 0 22 22" aria-hidden="true">${p[name]}</svg></span>`}
 
 
 function openVinylForm(id=null){
- let r=id?records.find(x=>x.id===id):{artist:"",album:"",year:"",label:"",country:"",catalog:"",format:"LP · 12″",speed:"33 RPM",edition:"",genre:"",disc:"VG+",sleeve:"VG+",date:new Date().toLocaleDateString("es-CL"),paid:"",market:"",location:"",notes:"",favorite:false,cover:""};
+ let r=id?records.find(x=>x.id===id):{artist:"",album:"",year:"",label:"",country:"",catalog:"",format:"LP · 12″",speed:"33 RPM",edition:"",genre:"",disc:"VG+",sleeve:"VG+",date:new Date().toLocaleDateString("es-CL"),paid:"",market:"",location:"",notes:"",favorite:false,cover:"",barcode:""};
  currentId=id;
  app.innerHTML=`<div class="form"><button class="icon" onclick="${id?`detail('${id}')`:`home()`}">←</button><h1>${id?"Editar vinilo":"Nuevo vinilo"}</h1>
  <div class="field"><label>PORTADA DEL DISCO</label>
  <img id="preview" class="coverPreview" src="${r.cover||""}" style="${r.cover?"":"display:none"}">
- <div class="coverTools">
-   <button type="button" onclick="searchCover()">${ico('search')}<span>Buscar portada</span></button>
-   <button type="button" onclick="document.getElementById('photoCamera').click()">${ico('camera')}<span>Tomar foto</span></button>
-   <button type="button" onclick="document.getElementById('photoFile').click()">${ico('image')}<span>Elegir foto</span></button>
-   <button class="dangerLite" type="button" onclick="clearCover()">${ico('x')}<span>Quitar portada</span></button>
+ <div class="coverTools" aria-label="Herramientas de portada">
+   <button type="button" title="Buscar portada" aria-label="Buscar portada" onclick="searchCover()">${ico('search')}</button>
+   <button type="button" title="Tomar foto" aria-label="Tomar foto" onclick="document.getElementById('photoCamera').click()">${ico('camera')}</button>
+   <button type="button" title="Elegir foto" aria-label="Elegir foto" onclick="document.getElementById('photoFile').click()">${ico('image')}</button>
+   <button type="button" title="Escanear código" aria-label="Escanear código de barras o QR" onclick="openScanner()">${ico('scan')}</button>
+   <button class="dangerLite" type="button" title="Quitar portada" aria-label="Quitar portada" onclick="clearCover()">${ico('x')}</button>
  </div>
  <input id="photoCamera" type="file" accept="image/*" capture="environment" hidden onchange="photoPreview(event)">
  <input id="photoFile" type="file" accept="image/*" hidden onchange="photoPreview(event)">
  <div id="coverStatus" class="status">Puedes buscarla por artista y álbum, o usar una foto del disco.</div>
  <div id="coverResults" class="coverSearch"></div>
+ <div id="scanPanel" class="scanPanel">
+   <div class="scanHead"><span>Escanear código</span><button type="button" class="scanClose" onclick="closeScanner()">×</button></div>
+   <video id="scanVideo" class="scanVideo" playsinline muted></video>
+   <div id="scanStatus" class="scanStatus">Apunta al código de barras o QR del disco.</div>
+   <div class="scanManual"><input id="manualCode" inputmode="numeric" placeholder="Código EAN / UPC"><button type="button" title="Buscar código" aria-label="Buscar código" onclick="lookupBarcode(document.getElementById('manualCode').value)">${ico('search')}</button></div>
+ </div>
  </div>
  <div class="field"><label>ARTISTA *</label><input id="artist" value="${esc(r.artist)}"></div><div class="field"><label>ÁLBUM *</label><input id="album" value="${esc(r.album)}"></div>
  <button class="autoFill" type="button" onclick="autofillFromWeb()">${ico('search')}<span>Autorrellenar datos desde la web</span></button>
  <div id="autoResults" class="coverSearch"></div>
  <div class="field"><label>AÑO</label><input id="year" value="${esc(r.year)}" inputmode="numeric"></div><div class="field"><label>SELLO</label><input id="label" value="${esc(r.label)}"></div>
  <div class="field"><label>PAÍS</label><input id="country" value="${esc(r.country)}"></div><div class="field"><label>Nº DE CATÁLOGO</label><input id="catalog" value="${esc(r.catalog)}"></div>
+ <div class="field"><label>CÓDIGO DE BARRAS</label><input id="barcode" value="${esc(r.barcode||"")}" inputmode="numeric" placeholder="EAN / UPC"></div>
  <div class="field"><label>FORMATO</label><select id="format"><option>LP · 12″</option><option>EP</option><option>Single · 7″</option><option>Otro</option></select></div>
  <div class="field"><label>VELOCIDAD</label><select id="speed"><option>33 RPM</option><option>45 RPM</option><option>78 RPM</option></select></div>
  <div class="field"><label>EDICIÓN</label><input id="edition" value="${esc(r.edition)}" placeholder="Original, reedición..."></div>
@@ -186,6 +194,7 @@ async function selectMusicBrainzRelease(x){
  document.getElementById('year').value=(x.date||'').slice(0,4);
  document.getElementById('country').value=x.country||'';
  document.getElementById('catalog').value=x['label-info']?.[0]?.['catalog-number']||'';
+ document.getElementById('barcode').value=x.barcode||'';
  document.getElementById('label').value=x['label-info']?.[0]?.label?.name||'';
  const fmt=x.media?.[0]?.format||''; if(fmt.toLowerCase().includes('vinyl'))document.getElementById('format').value='LP · 12″';
  try{
@@ -199,6 +208,38 @@ async function selectMusicBrainzRelease(x){
  }catch(e){}
  const box=document.getElementById('autoResults');if(box)box.innerHTML="<div class='status'>Datos completados. Revísalos antes de guardar.</div>";
  const status=document.getElementById('coverStatus');if(status)status.textContent='Datos y portada encontrados desde MusicBrainz.';
+}
+
+let scanStream=null, scanTimer=null;
+async function openScanner(){
+ const panel=document.getElementById('scanPanel'), video=document.getElementById('scanVideo'), status=document.getElementById('scanStatus');
+ if(!panel||!video)return; panel.classList.add('open');
+ if(!('BarcodeDetector' in window)){status.textContent='Este navegador no ofrece lector automático. Usa el campo de código manual.';return}
+ try{
+   const formats=['qr_code','ean_13','ean_8','upc_a','upc_e','code_128','itf'];
+   let detector; try{detector=new BarcodeDetector({formats})}catch(e){detector=new BarcodeDetector()}
+   scanStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}},audio:false});
+   video.srcObject=scanStream; await video.play(); status.textContent='Buscando…';
+   const tick=async()=>{if(!scanStream||video.readyState<2)return;
+     try{const codes=await detector.detect(video); if(codes.length){const raw=(codes[0].rawValue||'').trim(); status.textContent='Código detectado: '+raw; closeScanner(); lookupBarcode(raw); return;}}catch(e){}
+     scanTimer=requestAnimationFrame(tick);
+   }; tick();
+ }catch(e){status.textContent='No pude abrir la cámara. Revisa el permiso de cámara o usa el código manual.'}
+}
+function closeScanner(){if(scanTimer)cancelAnimationFrame(scanTimer);scanTimer=null;if(scanStream){scanStream.getTracks().forEach(t=>t.stop());scanStream=null}const v=document.getElementById('scanVideo');if(v)v.srcObject=null;const p=document.getElementById('scanPanel');if(p)p.classList.remove('open')}
+async function lookupBarcode(raw){
+ const code=(raw||'').replace(/\D/g,''); const status=document.getElementById('coverStatus'); const box=document.getElementById('autoResults');
+ if(!code){alert('Ingresa o escanea un código válido.');return}
+ if(status)status.textContent='Buscando la edición asociada al código '+code+'…';
+ if(box)box.innerHTML='<div class="status">Consultando MusicBrainz…</div>';
+ try{
+   const url='https://musicbrainz.org/ws/2/release/?query='+encodeURIComponent('barcode:'+code)+'&fmt=json&limit=8';
+   const res=await fetch(url,{headers:{'Accept':'application/json'}}); if(!res.ok)throw new Error('HTTP '+res.status);
+   const data=await res.json(); const results=data.releases||[];
+   if(!results.length){if(box)box.innerHTML='<div class="status">No encontré una edición con ese código. Puedes probar búsqueda por artista y álbum.</div>';return}
+   if(box)box.innerHTML=`<div class='coverSearchTitle' style='grid-column:1/-1'>Ediciones encontradas para ${esc(code)}</div>`+results.map((x,i)=>`<button type='button' class='coverOption' data-code-index='${i}'><div class='ct'><b>${esc(x.artist?.[0]?.name||'Artista')}</b><br>${esc(x.title||'Álbum')}<br>${esc((x.date||'').slice(0,4)||'—')} · ${esc(x.country||'País no indicado')}<br>${esc(x['label-info']?.[0]?.label?.name||'Sello no indicado')} · ${esc(x['label-info']?.[0]?.['catalog-number']||'Catálogo no indicado')}<br>${esc(x.media?.[0]?.format||'Formato no indicado')}</div></button>`).join('');
+   box.querySelectorAll('[data-code-index]').forEach(b=>b.addEventListener('click',()=>selectMusicBrainzRelease(results[Number(b.dataset.codeIndex)])));
+ }catch(e){console.error(e);if(box)box.innerHTML='<div class="status">No fue posible consultar la web ahora. Puedes continuar manualmente.</div>'}
 }
 
 function photoPreview(e){
@@ -249,7 +290,7 @@ async function cacheCover(url){
 async function saveForm(id){
  let old=id?records.find(x=>x.id===id):null;let p=document.getElementById("preview");
  const val=k=>document.getElementById(k)?.value ?? "";
- let r={id:id||String(Date.now()),artist:val("artist").trim(),album:val("album").trim(),year:val("year"),label:val("label"),country:val("country"),catalog:val("catalog"),format:val("format"),speed:val("speed"),edition:val("edition"),genre:val("genre"),disc:val("disc"),sleeve:val("sleeve"),date:val("date"),paid:val("paid"),market:val("market"),location:val("location"),notes:val("notes"),favorite:old?.favorite||false,cover:old?.cover||""};
+ let r={id:id||String(Date.now()),artist:val("artist").trim(),album:val("album").trim(),year:val("year"),label:val("label"),country:val("country"),catalog:val("catalog"),format:val("format"),speed:val("speed"),edition:val("edition"),genre:val("genre"),barcode:val("barcode"),disc:val("disc"),sleeve:val("sleeve"),date:val("date"),paid:val("paid"),market:val("market"),location:val("location"),notes:val("notes"),favorite:old?.favorite||false,cover:old?.cover||""};
  if(!r.artist||!r.album){alert("Artista y álbum son obligatorios.");return}
  if(p.dataset.clear){r.cover=""}
  const btn=document.querySelector('.actions .primary');if(btn){btn.disabled=true;btn.textContent="Guardando…"}
