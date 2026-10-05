@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f3eadb"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png">
+<title>Surco — Mi colección</title>
+<style>
+:root{--bg:#f3eadb;--card:#fffaf1;--ink:#171717;--muted:#6e675e;--accent:#ef7f22;--accent2:#6c8797;--line:#ddd1c0;--dark:#171717}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select,textarea{font:inherit} button{border:0;cursor:pointer}
+.app{max-width:480px;margin:auto;min-height:100vh;background:var(--bg);padding-bottom:88px}
+header{padding:22px 20px 10px;display:flex;justify-content:space-between;align-items:center}
+h1{font-family:Georgia,serif;font-size:30px;line-height:1.05;margin:0}.sub{color:var(--muted);margin-top:7px;font-size:14px}
+.icon{width:42px;height:42px;border-radius:50%;background:#fff8ec;box-shadow:0 3px 12px #00000010}
+.hero{margin:10px 18px 18px;background:var(--accent);border-radius:28px;min-height:390px;padding:20px;position:relative;overflow:hidden;box-shadow:0 14px 35px #00000018}
+.hero .record{position:absolute;width:310px;height:310px;border-radius:50%;background:radial-gradient(circle,#c9a56b 0 8%,#111 9% 12%,#151515 13% 38%,#0c0c0c 39% 100%);right:-40px;top:60px;box-shadow:0 20px 30px #0005}
+.hero .arm{position:absolute;width:12px;height:220px;background:#c6c6c6;right:62px;top:52px;transform:rotate(25deg);border-radius:8px}
+.hero .title{position:absolute;left:22px;bottom:20px;font-family:Georgia,serif;font-size:26px;max-width:220px}.hero small{font-family:inherit;color:#332b22}
+.section{padding:0 18px}.sectionHead{display:flex;justify-content:space-between;align-items:center;margin:16px 0 10px}.sectionHead h2{font-family:Georgia,serif;font-size:21px;margin:0}.link{color:var(--accent);font-size:13px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.cover{aspect-ratio:1;border-radius:15px;object-fit:cover;background:#ddd;box-shadow:0 6px 18px #00000012}.albumName{font-weight:650;font-size:14px;margin-top:7px}.artist{font-size:12px;color:var(--muted);margin-top:2px}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);background:#fffaf1eF;backdrop-filter:blur(16px);border-top:1px solid #00000010;display:flex;justify-content:space-around;padding:10px 10px calc(10px + env(safe-area-inset-bottom));z-index:20}
+.nav{background:none;color:var(--muted);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:4px}.nav.active{color:var(--accent);font-weight:700}.nav span:first-child{font-size:22px}
+.fab{position:fixed;right:max(22px,calc((100vw - 480px)/2 + 22px));bottom:88px;width:58px;height:58px;border-radius:50%;background:var(--dark);color:#fff;font-size:28px;box-shadow:0 10px 24px #0004;z-index:19}
+.page{padding:8px 18px}.search{display:flex;gap:8px;margin:8px 0}.search input{flex:1;padding:14px 16px;border:0;border-radius:18px;background:#fffaf1;box-shadow:inset 0 0 0 1px #0000000d}.pillrow{display:flex;gap:8px;overflow:auto;padding-bottom:8px}.pill{white-space:nowrap;padding:9px 14px;border-radius:99px;background:#e8ddcd;color:#4f493f;font-size:12px}.pill.active{background:var(--accent);color:#fff}
+.detail{padding:18px}.detailTop{display:flex;justify-content:space-between}.bigCover{width:100%;aspect-ratio:1;border-radius:24px;object-fit:cover;box-shadow:0 16px 36px #0003}.detail h1{font-size:34px;margin:18px 0 3px}.meta{color:var(--muted);font-size:14px}.expand{width:100%;margin:20px 0;padding:16px;border-radius:18px;background:#fffaf1;font-weight:700}.details{display:none}.details.open{display:block}.card{background:#fffaf1;border-radius:20px;padding:18px;margin:10px 0;box-shadow:0 6px 18px #0000000d}.row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}.row:last-child{border:0}.label{color:var(--muted)}
+.form{padding:18px}.form h1{margin-bottom:18px}.field{margin:12px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.field input,.field textarea,.field select{width:100%;padding:13px;border:1px solid var(--line);border-radius:14px;background:#fffaf1}.coverPreview{width:150px;height:150px;border-radius:18px;object-fit:cover;background:#e7ddcf;display:block;margin:0 auto 10px}.actions{display:flex;gap:10px;margin-top:18px}.primary{flex:1;background:var(--dark);color:#fff;padding:15px;border-radius:16px;font-weight:700}.secondary{padding:15px;border-radius:16px;background:#e5dacb}.danger{background:#a43b32;color:#fff}.themeGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.theme{padding:14px;border-radius:18px;background:#fffaf1;text-align:left;border:2px solid transparent}.theme.selected{border-color:var(--accent)}.swatches{display:flex;gap:6px;margin-bottom:10px}.swatches i{width:28px;height:28px;border-radius:50%;display:block}
+.empty{text-align:center;color:var(--muted);padding:50px 20px}.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div id="app" class="app"></div>
+<script>
+const seed=[
+{id:"1",artist:"Pink Floyd",album:"The Dark Side of the Moon",year:"1973",label:"Harvest",country:"UK",catalog:"SHVL 804",format:"LP · 12″",speed:"33 RPM",edition:"Primera edición",disc:"VG+",sleeve:"VG+",date:"04/10/2026",paid:"25000",market:"45000",location:"Estante 3 · Repisa 2",notes:"Un disco fundamental de mi colección.",favorite:true,cover:""},
+{id:"2",artist:"The Beatles",album:"Abbey Road",year:"1969",label:"Apple",country:"UK",catalog:"PCS 7088",format:"LP · 12″",speed:"33 RPM",edition:"Reedición",disc:"VG+",sleeve:"VG",date:"01/10/2026",paid:"18000",market:"35000",location:"Estante 1 · Repisa 1",notes:"",favorite:false,cover:""},
+{id:"3",artist:"Fleetwood Mac",album:"Rumours",year:"1977",label:"Warner Bros.",country:"USA",catalog:"BSK 3010",format:"LP · 12″",speed:"33 RPM",edition:"Original",disc:"VG",sleeve:"VG",date:"28/09/2026",paid:"12000",market:"22000",location:"Estante 2 · Repisa 4",notes:"",favorite:true,cover:""},
+{id:"4",artist:"David Bowie",album:"Low",year:"1977",label:"RCA",country:"UK",catalog:"PL 12030",format:"LP · 12″",speed:"33 RPM",edition:"Original",disc:"VG+",sleeve:"VG+",date:"20/09/2026",paid:"20000",market:"40000",location:"Estante 2 · Repisa 1",notes:"",favorite:false,cover:""}
+];
+let records=JSON.parse(localStorage.getItem("surco_records")||"null")||seed;
+let theme=localStorage.getItem("surco_theme")||"classic";
+let currentId=null;
+
+const themes={
+classic:{bg:"#f3eadb",card:"#fffaf1",ink:"#171717",muted:"#6e675e",accent:"#ef7f22"},
+blue:{bg:"#d7e7ee",card:"#fffaf1",ink:"#171717",muted:"#65727a",accent:"#3e7893"},
+olive:{bg:"#e7e8d8",card:"#fbf9ed",ink:"#1d211a",muted:"#68705e",accent:"#53643e"},
+night:{bg:"#202225",card:"#2d3034",ink:"#f7f1e5",muted:"#b9b1a5",accent:"#d88a42"}
+};
+function applyTheme(){let t=themes[theme];for(let k in t)document.documentElement.style.setProperty("--"+k,t[k]);}
+applyTheme();
+
+function money(v){return v?new Intl.NumberFormat("es-CL",{style:"currency",currency:"CLP",maximumFractionDigits:0}).format(+v):"—"}
+function cover(r){
+ if(r.cover)return `<img class="cover" src="${r.cover}" alt="">`;
+ const colors=["#121212","#31566a","#c4a27a","#2d3232"]; const c=colors[+r.id%colors.length];
+ return `<div class="cover" style="background:${c};display:grid;place-items:center;color:#fff;font-family:Georgia,serif;font-size:20px;text-align:center;padding:16px">${r.album}<small style="display:block;font:12px system-ui;margin-top:8px">${r.artist}</small></div>`;
+}
+function nav(active="home"){return `<div class="bottom">
+<button class="nav ${active==="home"?"active":""}" onclick="home()"><span>⌂</span>Inicio</button>
+<button class="nav ${active==="collection"?"active":""}" onclick="collection()"><span>▦</span>Colección</button>
+<button class="nav ${active==="favorites"?"active":""}" onclick="collection(true)"><span>♡</span>Favoritos</button>
+<button class="nav" onclick="settings()"><span>•••</span>Más</button></div>`}
+function home(){
+ let latest=[...records].slice(-3).reverse(), featured=records[0]||seed[0];
+ app.innerHTML=`<header><div><h1>Mi colección</h1><div class="sub">${records.length} vinilos</div></div><button class="icon" onclick="settings()">⚙</button></header>
+ <section class="hero" onclick="detail('${featured.id}')"><div class="record"></div><div class="arm"></div><div class="title">${featured.artist}<br><small>${featured.album} · ${featured.year}</small></div></section>
+ <section class="section"><div class="sectionHead"><h2>Últimos agregados</h2><button class="link" onclick="collection()">Ver todos</button></div>
+ <div class="grid">${latest.map(r=>`<div onclick="detail('${r.id}')">${cover(r)}<div class="albumName">${r.album}</div><div class="artist">${r.artist}</div></div>`).join("")}</div></section>
+ <button class="fab" onclick="form()">＋</button>${nav("home")}`;
+}
+function collection(fav=false){
+ app.innerHTML=`<header><div><h1>Mi colección</h1><div class="sub">${fav?"Favoritos":records.length+" vinilos"}</div></div></header>
+ <div class="page"><div class="search"><input id="q" placeholder="Buscar artista, álbum, sello..." oninput="renderGrid(${fav})"><button class="icon" onclick="filters()">☷</button></div>
+ <div class="pillrow"><button class="pill active" onclick="setFilter('')">Todos</button><button class="pill" onclick="setFilter('Rock')">Rock</button><button class="pill" onclick="setFilter('Pop')">Pop</button><button class="pill" onclick="setFilter('Jazz')">Jazz</button><button class="pill" onclick="setFilter('Clásica')">Clásica</button></div><div id="grid" class="grid"></div></div>
+ <button class="fab" onclick="form()"><span>＋</span></button>${nav("collection")}`; renderGrid(fav);
+}
+let activeFilter="";
+function setFilter(f){activeFilter=f;renderGrid(false)}
+function renderGrid(fav=false){
+ let q=(document.getElementById("q")?.value||"").toLowerCase();
+ let arr=records.filter(r=>(!fav||r.favorite)&&(!activeFilter||r.notes.toLowerCase().includes(activeFilter.toLowerCase())||r.album.toLowerCase().includes(activeFilter.toLowerCase()))&&[r.artist,r.album,r.label,r.country,r.catalog,r.location].join(" ").toLowerCase().includes(q));
+ document.getElementById("grid").innerHTML=arr.length?arr.map(r=>`<div onclick="detail('${r.id}')">${cover(r)}<div class="albumName">${r.album} ${r.favorite?"♡":""}</div><div class="artist">${r.artist} · ${r.year}</div></div>`).join(""):`<div class="empty" style="grid-column:1/-1">No encontramos vinilos con esos criterios.</div>`;
+}
+function detail(id){
+ currentId=id;let r=records.find(x=>x.id===id); if(!r)return;
+ app.innerHTML=`<div class="detail"><div class="detailTop"><button class="icon" onclick="collection()">←</button><div><button class="icon" onclick="toggleFav('${id}')">${r.favorite?"♥":"♡"}</button><button class="icon" onclick="form('${id}')">•••</button></div></div>
+ <div style="margin-top:16px">${cover(r).replace('class="cover"','class="bigCover"')}</div>
+ <h1>${r.artist}</h1><div style="font-family:Georgia,serif;font-size:23px">${r.album}</div><div class="meta">${r.year} · ${r.country||"—"} · ${r.label||"—"}</div>
+ <button class="expand" onclick="this.nextElementSibling.classList.toggle('open')">Ver detalles　⌄</button>
+ <div class="details">
+ <div class="card"><b>Datos de la edición</b>${row("Año",r.year)}${row("Sello",r.label)}${row("País",r.country)}${row("Nº de catálogo",r.catalog)}${row("Formato",r.format)}${row("Velocidad",r.speed)}${row("Edición",r.edition)}</div>
+ <div class="card"><b>Estado</b>${row("Disco",r.disc)}${row("Portada",r.sleeve)}</div>
+ <div class="card"><b>Mi colección</b>${row("Adquisición",r.date)}${row("Precio pagado",money(r.paid))}${row("Valor de mercado",money(r.market))}${row("Ubicación",r.location)}</div>
+ ${r.notes?`<div class="card"><b>Mi nota</b><p>${r.notes}</p></div>`:""}</div>
+ <div class="actions"><button class="primary" onclick="form('${id}')">Editar vinilo</button></div></div>${nav()}`;
+}
+function row(a,b){return `<div class="row"><span class="label">${a}</span><span>${b||"—"}</span></div>`}
+function toggleFav(id){let r=records.find(x=>x.id===id);r.favorite=!r.favorite;save();detail(id)}
+function form(id=null){
+ let r=id?records.find(x=>x.id===id):{artist:"",album:"",year:"",label:"",country:"",catalog:"",format:"LP · 12″",speed:"33 RPM",edition:"",disc:"VG+",sleeve:"VG+",date:new Date().toLocaleDateString("es-CL"),paid:"",market:"",location:"",notes:"",favorite:false,cover:""};
+ currentId=id;
+ app.innerHTML=`<div class="form"><button class="icon" onclick="${id?`detail('${id}')`:`home()`}">←</button><h1>${id?"Editar vinilo":"Nuevo vinilo"}</h1>
+ <img id="preview" class="coverPreview" src="${r.cover||""}" style="${r.cover?"":"display:none"}"><input id="photo" type="file" accept="image/*" capture="environment" onchange="photoPreview(event)">
+ <div class="field"><label>ARTISTA *</label><input id="artist" value="${esc(r.artist)}"></div><div class="field"><label>ÁLBUM *</label><input id="album" value="${esc(r.album)}"></div>
+ <div class="field"><label>AÑO</label><input id="year" value="${esc(r.year)}" inputmode="numeric"></div><div class="field"><label>SELLO</label><input id="label" value="${esc(r.label)}"></div>
+ <div class="field"><label>PAÍS</label><input id="country" value="${esc(r.country)}"></div><div class="field"><label>Nº DE CATÁLOGO</label><input id="catalog" value="${esc(r.catalog)}"></div>
+ <div class="field"><label>FORMATO</label><select id="format"><option>LP · 12″</option><option>EP</option><option>Single · 7″</option><option>Otro</option></select></div>
+ <div class="field"><label>VELOCIDAD</label><select id="speed"><option>33 RPM</option><option>45 RPM</option><option>78 RPM</option></select></div>
+ <div class="field"><label>EDICIÓN</label><input id="edition" value="${esc(r.edition)}" placeholder="Original, reedición..."></div>
+ <div class="field"><label>ESTADO DEL DISCO</label><select id="disc"><option>NM</option><option>EX</option><option selected>VG+</option><option>VG</option><option>G</option><option>P</option></select></div>
+ <div class="field"><label>ESTADO DE LA PORTADA</label><select id="sleeve"><option>NM</option><option>EX</option><option selected>VG+</option><option>VG</option><option>G</option><option>P</option></select></div>
+ <div class="field"><label>FECHA DE ADQUISICIÓN</label><input id="date" value="${esc(r.date)}"></div>
+ <div class="field"><label>PRECIO PAGADO</label><input id="paid" value="${esc(r.paid)}" inputmode="decimal"></div>
+ <div class="field"><label>VALOR DE MERCADO</label><input id="market" value="${esc(r.market)}" inputmode="decimal"></div>
+ <div class="field"><label>UBICACIÓN</label><input id="location" value="${esc(r.location)}" placeholder="Estante 3 · Repisa 2"></div>
+ <div class="field"><label>NOTAS</label><textarea id="notes" rows="3">${esc(r.notes)}</textarea></div>
+ <div class="actions"><button class="primary" onclick="saveForm('${id||""}')">Guardar vinilo</button>${id?`<button class="secondary danger" onclick="removeRecord('${id}')">Eliminar</button>`:""}</div>
+ </div>`;
+ document.getElementById("format").value=r.format;document.getElementById("speed").value=r.speed;document.getElementById("disc").value=r.disc;document.getElementById("sleeve").value=r.sleeve;
+}
+function esc(s){return String(s||"").replaceAll("&","&amp;").replaceAll('"',"&quot;").replaceAll("<","&lt;").replaceAll(">","&gt;")}
+function photoPreview(e){let f=e.target.files[0];if(!f)return;let url=URL.createObjectURL(f);let p=document.getElementById("preview");p.src=url;p.style.display="block";p.dataset.pending=url}
+function saveForm(id){
+ let old=id?records.find(x=>x.id===id):null;let p=document.getElementById("preview");
+ let r={id:id||String(Date.now()),artist:artist.value.trim(),album:album.value.trim(),year:year.value,label:label.value,country:country.value,catalog:catalog.value,format:format.value,speed:speed.value,edition:edition.value,disc:disc.value,sleeve:sleeve.value,date:date.value,paid:paid.value,market:market.value,location:location.value,notes:notes.value,favorite:old?.favorite||false,cover:old?.cover||""};
+ if(!r.artist||!r.album){alert("Artista y álbum son obligatorios.");return}
+ if(p.dataset.pending){let c=document.createElement("canvas"),ctx=c.getContext("2d"),img=new Image();img.onload=()=>{let max=1000,s=Math.min(1,max/img.width,max/img.height);c.width=img.width*s;c.height=img.height*s;ctx.drawImage(img,0,0,c.width,c.height);r.cover=c.toDataURL("image/jpeg",.82);records=id?records.map(x=>x.id===id?r:x):[...records,r];save();detail(r.id)};img.src=p.dataset.pending;return}
+ records=id?records.map(x=>x.id===id?r:x):[...records,r];save();detail(r.id)
+}
+function save(){localStorage.setItem("surco_records",JSON.stringify(records))}
+function removeRecord(id){if(confirm("¿Eliminar este vinilo de la colección?")){records=records.filter(x=>x.id!==id);save();collection()}}
+function filters(){alert("Filtros avanzados del prototipo: artista, año, país, sello, estado y ubicación. Los añadiremos como panel visual en la siguiente iteración.")}
+function settings(){
+ app.innerHTML=`<header><div><h1>Apariencia</h1><div class="sub">Elige el ambiente de tu biblioteca.</div></div></header><div class="page"><div class="themeGrid">
+ ${themeCard("classic","Clásico","#f3eadb","#ef7f22","#171717","Cálido y atemporal")}
+ ${themeCard("blue","Azul","#d7e7ee","#3e7893","#171717","Sereno y moderno")}
+ ${themeCard("olive","Oliva","#e7e8d8","#53643e","#1d211a","Natural y relajado")}
+ ${themeCard("night","Nocturno","#202225","#d88a42","#f7f1e5","Para escuchar de noche")}
+ </div><div class="card" style="margin-top:16px"><b>V1</b><p style="color:var(--muted)">La biblioteca funciona localmente en este prototipo. El escaneo de códigos y Discogs quedan preparados para la siguiente etapa.</p></div></div>${nav()}`;
+}
+function themeCard(id,name,bg,ac,ink,desc){return `<button class="theme ${theme===id?"selected":""}" onclick="theme='${id}';localStorage.setItem('surco_theme',theme);applyTheme();settings()"><div class="swatches"><i style="background:${bg}"></i><i style="background:${ac}"></i><i style="background:${ink}"></i></div><b>${name}</b><div style="font-size:12px;color:var(--muted);margin-top:3px">${desc}</div></button>`}
+home();
+</script>
+<script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js");</script></body></html>
