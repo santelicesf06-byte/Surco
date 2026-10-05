@@ -67,13 +67,13 @@ function home(){
  <section class="hero" onclick="detail('${featured.id}')"><div class="record"></div><div class="arm"></div><div class="title">${featured.artist}<br><small>${featured.album} · ${featured.year}</small></div></section>
  <section class="section"><div class="sectionHead"><h2>Últimos agregados</h2><button class="link" onclick="collection()">Ver todos</button></div>
  <div class="grid">${latest.map(r=>`<div onclick="detail('${r.id}')">${cover(r)}<div class="albumName">${r.album}</div><div class="artist">${r.artist}</div></div>`).join("")}</div></section>
- <button class="fab" onclick="form()">＋</button>${nav("home")}`;
+ <button class="fab" onclick="openVinylForm()">＋</button>${nav("home")}`;
 }
 function collection(fav=false){
  app.innerHTML=`<header><div><h1>Mi colección</h1><div class="sub">${fav?"Favoritos":records.length+" vinilos"}</div></div></header>
  <div class="page"><div class="search"><input id="q" placeholder="Buscar artista, álbum, sello..." oninput="renderGrid(${fav})"><button class="icon" onclick="filters()">☷</button></div>
  <div class="pillrow"><button class="pill active" onclick="setFilter('')">Todos</button><button class="pill" onclick="setFilter('Rock')">Rock</button><button class="pill" onclick="setFilter('Pop')">Pop</button><button class="pill" onclick="setFilter('Jazz')">Jazz</button><button class="pill" onclick="setFilter('Clásica')">Clásica</button></div><div id="grid" class="grid"></div></div>
- <button class="fab" onclick="form()"><span>＋</span></button>${nav("collection")}`; renderGrid(fav);
+ <button class="fab" onclick="openVinylForm()"><span>＋</span></button>${nav("collection")}`; renderGrid(fav);
 }
 let activeFilter="";
 function setFilter(f){activeFilter=f;renderGrid(false)}
@@ -84,7 +84,7 @@ function renderGrid(fav=false){
 }
 function detail(id){
  currentId=id;let r=records.find(x=>x.id===id); if(!r)return;
- app.innerHTML=`<div class="detail"><div class="detailTop"><button class="icon" onclick="collection()">←</button><div><button class="icon" onclick="toggleFav('${id}')">${r.favorite?"♥":"♡"}</button><button class="icon" onclick="form('${id}')">•••</button></div></div>
+ app.innerHTML=`<div class="detail"><div class="detailTop"><button class="icon" onclick="collection()">←</button><div><button class="icon" onclick="toggleFav('${id}')">${r.favorite?"♥":"♡"}</button><button class="icon" onclick="openVinylForm('${id}')">•••</button></div></div>
  <div style="margin-top:16px">${cover(r).replace('class="cover"','class="bigCover"')}</div>
  <h1>${r.artist}</h1><div style="font-family:Georgia,serif;font-size:23px">${r.album}</div><div class="meta">${r.year} · ${r.country||"—"} · ${r.label||"—"}</div>
  <button class="expand" onclick="this.nextElementSibling.classList.toggle('open')">Ver detalles　⌄</button>
@@ -93,11 +93,11 @@ function detail(id){
  <div class="card"><b>Estado</b>${row("Disco",r.disc)}${row("Portada",r.sleeve)}</div>
  <div class="card"><b>Mi colección</b>${row("Adquisición",r.date)}${row("Precio pagado",money(r.paid))}${row("Valor de mercado",money(r.market))}${row("Ubicación",r.location)}</div>
  ${r.notes?`<div class="card"><b>Mi nota</b><p>${r.notes}</p></div>`:""}</div>
- <div class="actions"><button class="primary" onclick="form('${id}')">Editar vinilo</button></div></div>${nav()}`;
+ <div class="actions"><button class="primary" onclick="openVinylForm('${id}')">Editar vinilo</button></div></div>${nav()}`;
 }
 function row(a,b){return `<div class="row"><span class="label">${a}</span><span>${b||"—"}</span></div>`}
 function toggleFav(id){let r=records.find(x=>x.id===id);r.favorite=!r.favorite;save();detail(id)}
-function form(id=null){
+function openVinylForm(id=null){
  let r=id?records.find(x=>x.id===id):{artist:"",album:"",year:"",label:"",country:"",catalog:"",format:"LP · 12″",speed:"33 RPM",edition:"",disc:"VG+",sleeve:"VG+",date:new Date().toLocaleDateString("es-CL"),paid:"",market:"",location:"",notes:"",favorite:false,cover:""};
  currentId=id;
  app.innerHTML=`<div class="form"><button class="icon" onclick="${id?`detail('${id}')`:`home()`}">←</button><h1>${id?"Editar vinilo":"Nuevo vinilo"}</h1>
@@ -123,7 +123,8 @@ function esc(s){return String(s||"").replaceAll("&","&amp;").replaceAll('"',"&qu
 function photoPreview(e){let f=e.target.files[0];if(!f)return;let url=URL.createObjectURL(f);let p=document.getElementById("preview");p.src=url;p.style.display="block";p.dataset.pending=url}
 function saveForm(id){
  let old=id?records.find(x=>x.id===id):null;let p=document.getElementById("preview");
- let r={id:id||String(Date.now()),artist:artist.value.trim(),album:album.value.trim(),year:year.value,label:label.value,country:country.value,catalog:catalog.value,format:format.value,speed:speed.value,edition:edition.value,disc:disc.value,sleeve:sleeve.value,date:date.value,paid:paid.value,market:market.value,location:location.value,notes:notes.value,favorite:old?.favorite||false,cover:old?.cover||""};
+ const val=id=>document.getElementById(id)?.value ?? "";
+ let r={id:id||String(Date.now()),artist:val("artist").trim(),album:val("album").trim(),year:val("year"),label:val("label"),country:val("country"),catalog:val("catalog"),format:val("format"),speed:val("speed"),edition:val("edition"),disc:val("disc"),sleeve:val("sleeve"),date:val("date"),paid:val("paid"),market:val("market"),location:val("location"),notes:val("notes"),favorite:old?.favorite||false,cover:old?.cover||""};
  if(!r.artist||!r.album){alert("Artista y álbum son obligatorios.");return}
  if(p.dataset.pending){let c=document.createElement("canvas"),ctx=c.getContext("2d"),img=new Image();img.onload=()=>{let max=1000,s=Math.min(1,max/img.width,max/img.height);c.width=img.width*s;c.height=img.height*s;ctx.drawImage(img,0,0,c.width,c.height);r.cover=c.toDataURL("image/jpeg",.82);records=id?records.map(x=>x.id===id?r:x):[...records,r];save();detail(r.id)};img.src=p.dataset.pending;return}
  records=id?records.map(x=>x.id===id?r:x):[...records,r];save();detail(r.id)
